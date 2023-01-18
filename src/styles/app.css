@@ -17,3 +17,33 @@
 
     color: red;
 }
+.col-12{
+    display: flex;
+    justify-content: space-between;
+    /* box-shadow: 0 0 3px 1px #333; */
+}
+.col-12:hover{
+    box-shadow: 0 0 3px 2px #222;
+}
+.card{
+    transition: .5s;
+}
+.card:hover{
+    transform: translateY(-10px);
+    color: #fff;
+    background: rgb(18, 18, 41);
+}
+button{
+    position: absolute;
+    margin-bottom: 0px;
+}
+
+.Music{
+    font-size: 50px;
+    text-align: center;
+    font-weight: 800;
+}
+.maumau{
+    text-align: center;
+    font-size: 50px;
+}
