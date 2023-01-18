@@ -1,28 +1,53 @@
+import { Link } from "react-router-dom";
 
-const Member = ({ dob, dod, name, Featured_artists,Featured_artist,Genre,Artist ,Nomination ,description, showAdditional ,image, Released, Award }) => {
-    return <div className="card">
-        <img src={image} alt="" className="card-img-top" />
+const Member = ({ id, dob, dod, type, name, image, groupId, founded, description }) => {
+    description = description.length > 100
+        ? `${(description || '').substring(0, 100)} ...`
+        : description;
 
-        <div className="card-body">
-            <h5 className="card-title">{name}</h5>
-            <div className="card-text">
-                <p className="lead">{description}</p>
-                <p>{Artist}</p>
-                <p>{Released}</p>
-                <p>{Award}</p>
-                <p>{Featured_artist}</p>
-                <p>{Nomination}</p>
-                <p>{Genre}</p>
-                <p>{Featured_artists}</p>
-                 
-                <div className="d-flex justify-content-between">
-                    <strong className="text-warning">{dob}</strong>
-                    <strong className="text-danger">{dod}</strong>
-                    {/* <button className="btn btn-success" onClick={() => showAdditional(additional)}>More Info</button> */}
+    const href = type === "individual"
+        ? groupId
+            ? `/groups/${groupId}/individuals/${id}`
+            : `/individuals/${id}`
+        : `/groups/${id}`;
+
+    return <Link to={href} style={{ display: "flex", textDecoration: "none" }}>
+        <div className="card">
+            <div className="rounded-top" style={{
+                height: 240,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundImage: `url(${image})`
+            }}>
+
+            </div>
+
+            <div className="card-body">
+                <h5 className="card-title text-dark">{name}</h5>
+
+                <div className="card-text">
+                    <p className="lead text-dark">
+                        {description}
+                    </p>
+
+                    {
+                        type === "individual"
+                            ? <div className="d-flex justify-content-between">
+                                <strong className="text-warning">Born: {dob}</strong>
+                                <strong className="text-danger">Died: {dod}</strong>
+                            </div>
+                            : <div className="d-flex justify-content-between">
+                                <strong className="text-primary">Founded: {founded}</strong>
+                            </div>
+                    }
                 </div>
+
+
+
             </div>
         </div>
-    </div>;
+    </Link>;
 }
 
 export default Member;
